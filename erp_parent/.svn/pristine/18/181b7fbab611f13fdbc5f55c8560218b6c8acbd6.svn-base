@@ -1,0 +1,84 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>职位管理</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/crud.js"></script>
+<script type="text/javascript">
+	var name="job";
+	var columns=[[
+	  		    {field:'uuid',title:'uuid',width:100},
+	  		    {field:'name',title:'名称',width:100},
+	  		    {field:'suffix',title:'后缀',width:100},
+	  		    {field:'rank',title:'职级',width:100},
+	  		    {field:'depuuid',title:'部门编号',width:100},
+	  		    {field:'empuuid',title:'员工编号',width:100},
+	  		    {field:'remark',title:'备注',width:100},
+	  		    {field:'pid',title:'上级编号',width:100},
+
+				{field:'-',title:'操作',width:200,formatter: function(value,row,index){
+					var oper = "<a href=\"javascript:void(0)\" onclick=\"edit(" + row.uuid + ')">修改</a>';
+					oper += ' <a href="javascript:void(0)" onclick="del(' + row.uuid + ')">删除</a>';
+					return oper;
+				}}
+				]];
+
+</script>
+</head>
+<body>
+<div class="easyui-panel" style="padding-left:4px;border-bottom:0px;">
+	<div style="height:2px;"></div>
+	<form id="searchForm">
+			名称：<input name="t1.name" >
+	后缀：<input name="t1.suffix" >
+	职级：<input name="t1.rank" >
+	部门编号：<input name="t1.depuuid" >
+	员工编号：<input name="t1.empuuid" >
+	备注：<input name="t1.remark" >
+	上级编号：<input name="t1.pid" >
+
+		<button type="button" id="btnSearch">查询</button>
+	</form>
+	<div style="height:2px;"></div>
+</div>
+<table id="grid"></table>
+
+<div id="editDlg" style="padding:8px;">
+	<form id="editForm">
+			<input name="t.uuid" type="hidden"> 
+
+		<table>
+						<tr>
+				<td>名称</td><td><input name="t.name"> </td>
+			</tr>
+			<tr>
+				<td>后缀</td><td><input name="t.suffix"> </td>
+			</tr>
+			<tr>
+				<td>职级</td><td><input name="t.rank"> </td>
+			</tr>
+			<tr>
+				<td>部门编号</td><td><input name="t.depuuid"> </td>
+			</tr>
+			<tr>
+				<td>员工编号</td><td><input name="t.empuuid"> </td>
+			</tr>
+			<tr>
+				<td>备注</td><td><input name="t.remark"> </td>
+			</tr>
+			<tr>
+				<td>上级编号</td><td><input name="t.pid"> </td>
+			</tr>
+
+		</table>
+	</form>
+</div>
+
+</body>
+</html>

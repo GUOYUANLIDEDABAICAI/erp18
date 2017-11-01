@@ -1,0 +1,18 @@
+<?xml version="1.0" encoding="utf-8"?>
+<!DOCTYPE hibernate-mapping PUBLIC "-//Hibernate/Hibernate Mapping DTD 3.0//EN"
+"http://hibernate.sourceforge.net/hibernate-mapping-3.0.dtd">
+<hibernate-mapping>
+    <class name="cn.itcast.erp.entity.Emp_leavenote" table="emp_leavenote" >
+        <id name="uuid" >
+            <generator class="org.hibernate.id.enhanced.SequenceStyleGenerator"> <param name="sequence_name">emp_leavenote_seq</param> </generator>
+        </id>
+
+        <property name="empuuid" />
+        <!-- <property name="leavenoteuuid" />  -->
+        <property name="type" /> 
+        <property name="state" /> 
+        
+        <many-to-one name="leavenote" column="leavenoteuuid" class="cn.itcast.erp.entity.Leavenote"></many-to-one>
+ 
+    </class>
+</hibernate-mapping>

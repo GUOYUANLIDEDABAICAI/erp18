@@ -1,0 +1,35 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">  
+	
+	<bean id="mailSender" class="org.springframework.mail.javamail.JavaMailSenderImpl">
+		<!-- 使用的协议 -->
+        <property name="protocol" value="smtp"/>
+        <!-- 邮件服务器 -->
+        <property name="host" value="smtp.zoho.com.cn"/>
+        <!-- 端口 -->
+        <property name="port" value="465" />
+        <!-- 登陆邮件服务器的用户名 -->
+        <property name="username" value="fadali@zoho.com.cn"/>
+        <!-- 密码 -->
+        <property name="password" value="bB123456"/>
+        <property name="javaMailProperties">
+            <props>
+            	<!-- 需要验证登陆的用户名跟密码，保证用户名与发件人一致 -->
+                <prop key="mail.smtp.auth">true</prop>
+                <!-- ssl加密邮件 -->
+				<prop key="mail.smtp.ssl.enable">true</prop>
+            </props>
+        </property>
+    </bean>
+	
+	<bean id="mailUtil" class="cn.itcast.erp.util.MailUtil" >
+		<property name="sender" ref="mailSender"></property>
+		<property name="from" value="fadali@zoho.com.cn"></property>
+	</bean>
+	
+</beans>
+	

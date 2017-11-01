@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>请假</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<link rel="stylesheet" type="text/css" href="css/table.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="ui/date.js"></script>
+<script type="text/javascript" src="ui/request.js"></script>
+<script type="text/javascript" src="js/leavenote.js"></script>
+</head>
+<body>
+
+<!-- 请假单列表 -->
+<table id="grid"></table>
+
+<!-- 请假申请对话框 -->
+<div id="applyDlg" style="padding:8px;">
+	<form id="leavenoteForm">
+		请假时间：<input class="easyui-datetimebox" name="t.starttime" data-options="required:true,showSeconds:false" style="width:150px">
+		至 <input class="easyui-datetimebox" name="t.endtime" data-options="required:true,showSeconds:false" style="width:150px"><br/>
+		<div style="padding:2px"></div>	
+		请假原因：<input type="text" name="t.reason"/>
+	</form>	
+	<div style="padding:2px"></div>	
+	<button type="button" id="btnApply">提交</button>
+</div>
+
+</body>
+</html>

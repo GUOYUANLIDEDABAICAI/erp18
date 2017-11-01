@@ -1,0 +1,49 @@
+﻿<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+	xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" 
+	xsi:schemaLocation="
+		http://www.springframework.org/schema/beans 
+		http://www.springframework.org/schema/beans/spring-beans.xsd">  
+	
+	<!-- 定义一个任务类 -->
+	<bean id="mailJob" class="cn.itcast.erp.job.MailJob">
+		<property name="mailUtil" ref="mailUtil"></property>
+		<property name="storedetailBiz" ref="storedetailBiz"></property>
+		<property name="to" value="erik2010163@163.com"></property>
+		<property name="subject" value="库存预警:[time]"></property>
+		<property name="text" value="亲，有[count]种商品已经库存预警了，请登陆蓝云ERP旗舰版3.1系统查看"></property>
+		<property name="freeMarker" ref="freeMarker"></property>
+	</bean>
+	<!-- 任务类描述 -->
+	<bean id="jobDetail" class="org.springframework.scheduling.quartz.MethodInvokingJobDetailFactoryBean">
+		<property name="targetObject" ref="mailJob"></property>
+		<property name="targetMethod" value="doJob"></property>
+		<!-- 禁止并发 -->
+		<property name="concurrent" value="false"></property>
+	</bean>
+	<!-- 触发器  -->
+	<bean id="trigger" class="org.springframework.scheduling.quartz.CronTriggerFactoryBean">
+		<property name="jobDetail" ref="jobDetail"></property>
+		<!-- 七子表达式： -->
+		<property name="cronExpression" value="0/30 * * * * ? *"></property>
+	</bean>
+	<!-- 任务调度管理容器 -->
+	<!-- <bean id="scheduler" class="org.springframework.scheduling.quartz.SchedulerFactoryBean" >
+		<property name="triggers">
+			<list>
+				<ref bean="trigger"/>
+			</list>
+		</property>
+		<property name="quartzProperties"> 
+            <props>
+            	跳过更新检查
+                <prop key="org.quartz.scheduler.skipUpdateCheck">true</prop> 
+            </props>
+        </property>
+	</bean> -->
+	
+	<bean id="freeMarker" class="org.springframework.ui.freemarker.FreeMarkerConfigurationFactoryBean">
+	    <property name="templateLoaderPaths" value="classpath:mailTemplate"></property>
+	</bean>
+</beans>
+	

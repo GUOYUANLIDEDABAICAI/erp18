@@ -1,0 +1,69 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>员工请假单管理</title>
+<link rel="stylesheet" type="text/css" href="ui/themes/default/easyui.css">
+<link rel="stylesheet" type="text/css" href="ui/themes/icon.css">
+<script type="text/javascript" src="ui/jquery.min.js"></script>
+<script type="text/javascript" src="ui/jquery.easyui.min.js"></script>
+<script type="text/javascript" src="ui/locale/easyui-lang-zh_CN.js"></script>
+<script type="text/javascript" src="ui/jquery.serializejson.min.js"></script>
+<script type="text/javascript" src="js/crud.js"></script>
+<script type="text/javascript">
+	var name="emp_leavenote";
+	var columns=[[
+	  		    {field:'uuid',title:'编号',width:100},
+	  		    {field:'empuuid',title:'员工编号',width:100},
+	  		    {field:'leavenoteuuid',title:'请假单编号',width:100},
+	  		    {field:'type',title:'类型',width:100},
+	  		    {field:'state',title:'状态',width:100},
+
+				{field:'-',title:'操作',width:200,formatter: function(value,row,index){
+					var oper = "<a href=\"javascript:void(0)\" onclick=\"edit(" + row.uuid + ')">修改</a>';
+					oper += ' <a href="javascript:void(0)" onclick="del(' + row.uuid + ')">删除</a>';
+					return oper;
+				}}
+				]];
+
+</script>
+</head>
+<body>
+<div class="easyui-panel" style="padding-left:4px;border-bottom:0px;">
+	<div style="height:2px;"></div>
+	<form id="searchForm">
+			员工编号：<input name="t1.empuuid" >
+	请假单编号：<input name="t1.leavenoteuuid" >
+	类型：<input name="t1.type" >
+	状态：<input name="t1.state" >
+
+		<button type="button" id="btnSearch">查询</button>
+	</form>
+	<div style="height:2px;"></div>
+</div>
+<table id="grid"></table>
+
+<div id="editDlg" style="padding:8px;">
+	<form id="editForm">
+			<input name="t.uuid" type="hidden"> 
+
+		<table>
+						<tr>
+				<td>员工编号</td><td><input name="t.empuuid"> </td>
+			</tr>
+			<tr>
+				<td>请假单编号</td><td><input name="t.leavenoteuuid"> </td>
+			</tr>
+			<tr>
+				<td>类型</td><td><input name="t.type"> </td>
+			</tr>
+			<tr>
+				<td>状态</td><td><input name="t.state"> </td>
+			</tr>
+
+		</table>
+	</form>
+</div>
+
+</body>
+</html>
